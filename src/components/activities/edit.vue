@@ -225,7 +225,6 @@ import CreateCompany from "../clients/companies/create"
                 this.$store.dispatch('company/getCompanies')
             },
             closeDialogCreateLead: function(params) {
-                console.log('perro')
                 this.createLeadDialog = false;
                 this.$store.dispatch('lead/getLeads')
             },

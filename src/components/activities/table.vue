@@ -168,7 +168,6 @@ export default {
             if(this.company!='' && this.company!=undefined && this.company!=null){
                 calendars = calendars.filter(calendar=>calendar.company_id == this.company)
             }
-            console.log(this.$route.params)
             if(this.$route.params.type!=undefined){
                 var startDate = []
                 var date = new Date()
@@ -344,6 +343,7 @@ export default {
             this.$store.dispatch('calendar/getCalendars')
         },
         closeCreateDialogCalendar: function(params) {
+            console.log('table')
             this.createDialog = false;
             this.$store.dispatch('calendar/getCalendars')
         },
@@ -373,9 +373,7 @@ export default {
             this.sheet = true
         },
         editItem(id){
-            console.log(id)
             this.calendar = this.$store.state.calendar.calendars.filter(calendar=>calendar.id == id)[0]
-            console.log(this.calendar)
             this.editDialog = true
         },
         salesman(user_id){

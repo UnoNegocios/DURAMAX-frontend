@@ -123,10 +123,8 @@ export default {
             }
         },
         close () {
-            console.log('gato')
             this.editedItem = Object.assign({}, this.defaultItem)
             this.$nextTick(() => {
-                console.log('raton')
                 this.$emit("closeDialogCreateLead", false);
             })
         },

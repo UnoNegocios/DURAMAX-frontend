@@ -209,7 +209,6 @@
         var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
         var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
         this.calendars = this.$store.state.calendar.calendars.filter(calendar=>new Date(calendar.only_date)>=firstDay&&new Date(calendar.only_date)<=lastDay)//.filter(id=>id.id == '2983')
-        console.log(this.calendars)
         this.renderComponent = false;
         this.$nextTick(() => {
             this.renderComponent = true;
@@ -242,7 +241,6 @@
           })
         }
         this.events = cal
-        console.log(this.events)
         return this.events 
       },
     },
