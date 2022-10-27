@@ -44,7 +44,7 @@
                                         </v-menu>
                                     </v-col>
                                     <v-col class="py-0 pr-0" cols="12" sm="6" md="6">
-                                        <v-autocomplete clearable v-model="calendar.only_time" prepend-icon="mdi-clock-outline" :items="hours" label="Hora">               
+                                        <v-autocomplete required :rules="[v => !!v || 'Campo requerido']" clearable v-model="calendar.only_time" prepend-icon="mdi-clock-outline" :items="hours" label="Hora">               
                                         </v-autocomplete>
                                     </v-col>  
                                 </v-row>
@@ -108,6 +108,10 @@
           <createLead @closeDialogCreateLead="closeDialogCreateLead"/>
         </v-dialog>
 
+        <v-snackbar :color="snackbar.color" v-model="snackbar.show">
+            {{ snackbar.message }}
+        </v-snackbar>
+
 
     </v-card>
 </template>
@@ -127,6 +131,11 @@ import CreateCompany from "../clients/companies/create"
             company:String
         },
         data: () => ({
+            snackbar: {
+                show: false,
+                message: null,
+                color: null
+            },
             gris:false,
             clientType:'empresa',
             createContactDialog: false,
@@ -201,6 +210,9 @@ import CreateCompany from "../clients/companies/create"
             }*/
             this.calendars[0].only_date = new Date().toLocaleString("sv-SE", {timeZone: "America/Mexico_City"}).toString().slice(0, 10)
         },
+        mounted(){
+            this.calendars[0].only_date = new Date().toLocaleString("sv-SE", {timeZone: "America/Mexico_City"}).toString().slice(0, 10)
+        },
         methods: {
             color(k){
                 if(k%2==0){
@@ -251,7 +263,8 @@ import CreateCompany from "../clients/companies/create"
                     //contact_id:'',
                     activity_id:'',
                     only_date:'',
-                    //only_time:'',
+                    only_time:'08:30:00',
+                    date:'',
                     description:'',
                     completed:'',
                     user_id:''
@@ -273,6 +286,12 @@ import CreateCompany from "../clients/companies/create"
                             console.log('2')
                             this.gris = false
                             this.close()
+                        }
+                    }).catch(error=>{
+                        this.snackbar = {
+                            message: error.response.data.message,
+                            color: 'error',
+                            show: true
                         }
                     })
                 }
