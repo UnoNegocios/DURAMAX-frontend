@@ -4,7 +4,7 @@
       <!-- Header del calendario -->
       <v-sheet height="64">
         <v-toolbar flat>
-          <v-btn outlined class="mr-4" color="grey darken-2" @click="setToday">{{componentName}}</v-btn>
+          <v-btn outlined class="mr-4" color="grey darken-2" @click="setToday">HOY</v-btn>
           <v-btn fab text small color="grey darken-2" @click="prev">
             <v-icon small>mdi-chevron-left</v-icon>
           </v-btn>
@@ -196,7 +196,6 @@
       selectedElement: null,
       selectedOpen: false,
       events: [],
-      calendars:''
     }),
     mounted () {
       this.$refs.calendar.checkChange()
@@ -204,16 +203,11 @@
     created(){
     },
     computed:{
-      componentName(){
-        var date = new Date()
-        var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
-        var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
-        this.calendars = this.$store.state.calendar.calendars.filter(calendar=>new Date(calendar.only_date)>=firstDay&&new Date(calendar.only_date)<=lastDay)//.filter(id=>id.id == '2983')
-        this.renderComponent = false;
-        this.$nextTick(() => {
-            this.renderComponent = true;
-        });
-        return 'Hoy'
+      calendars(){
+        //var date = new Date()
+        //var firstDay = new Date(date.getFullYear(), date.getMonth() - 5, 1);
+        //var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+        return this.$store.state.calendar.calendars//.filter(calendar=>new Date(calendar.only_date)>=firstDay&&new Date(calendar.only_date)<=lastDay)//.filter(id=>id.id == '2983')
       },
       currentUser:{
         get(){
