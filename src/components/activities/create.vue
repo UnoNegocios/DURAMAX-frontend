@@ -262,7 +262,7 @@ import CreateCompany from "../clients/companies/create"
                     company_id:null,
                     //contact_id:'',
                     activity_id:'',
-                    only_date:'',
+                    only_date:new Date().toLocaleString("sv-SE", {timeZone: "America/Mexico_City"}).toString().slice(0, 10),
                     only_time:'08:30:00',
                     date:'',
                     description:'',

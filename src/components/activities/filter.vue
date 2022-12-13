@@ -19,11 +19,11 @@
                 </v-menu>
             </div>
 
-            <v-autocomplete v-if="company==undefined" @keydown.enter="filter()" v-model="calendar.company_id" :items="companyLists" item-text="name" item-value="id" attach chips label="Empresa" multiple>
+            <v-autocomplete v-if="company==undefined&&lead==undefined" @keydown.enter="filter()" v-model="calendar.company_id" :items="companyLists" item-text="name" item-value="id" attach chips label="Empresa" multiple>
                 <template slot="no-data" class="pa-2">No existen empresas relacionadas.</template>  
             </v-autocomplete>
 
-            <v-autocomplete v-if="lead==undefined" @keydown.enter="filter()" v-model="calendar.lead_id" :items="leadLists" item-text="name" item-value="id" attach chips label="Prospecto" multiple>
+            <v-autocomplete v-if="lead==undefined&&company==undefined" @keydown.enter="filter()" v-model="calendar.lead_id" :items="leadLists" item-text="name" item-value="id" attach chips label="Prospecto" multiple>
                 <template slot="no-data" class="pa-2">No existen prospectos relacionados.</template>  
             </v-autocomplete>
 
