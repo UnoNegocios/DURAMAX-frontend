@@ -2,9 +2,6 @@
     <v-container style="max-width:100%;" class="px-6">
         <v-toolbar flat class="px-6 pb-4 pt-2">
             <v-toolbar-title class="mt-4">Metas</v-toolbar-title>
-            <v-btn @click="downloadPDF()" icon>
-                <v-icon class="ml-4 mt-4">mdi-download</v-icon>
-            </v-btn>
             <v-spacer></v-spacer>
             <v-autocomplete class="pt-5" v-model="date_filter" :items="goals" item-text="name" item-value="dates"></v-autocomplete>
             <v-dialog v-model="dialog" width="750" >
