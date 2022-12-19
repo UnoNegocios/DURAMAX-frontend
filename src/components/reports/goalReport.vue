@@ -269,7 +269,8 @@ export default {
                 user.name!='Norbak'&&
                 user.name!='Luis Gonzalez'&&
                 user.name!='José Manuel'&&
-                user.name!='Inhabilitado'
+                user.name!='Inhabilitado'&&
+                user.name!='Aracely'
             )
         }
     },

@@ -108,7 +108,9 @@ export default {
                 user.name!='Alejandro Díaz'&&
                 user.name!='Norbak'&&
                 user.name!='Luis Gonzalez'&&
-                user.name!='José Manuel'
+                user.name!='José Manuel'&&
+                user.name!='Inhabilitado'&&
+                user.name!='Aracely'
             )
         },
         activitiesLists(){
