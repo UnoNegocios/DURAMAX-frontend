@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "serve": "NODE_OPTIONS=--openssl-legacy-provider vue-cli-service  serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "build": "NODE_OPTIONS=--openssl-legacy-provider vue-cli-service   build",
+    "lint": "NODE_OPTIONS=--openssl-legacy-provider vue-cli-service   lint"
   },
   "dependencies": {
     "apexcharts": "^3.25.0",
@@ -16,6 +16,7 @@
     "vue": "^2.6.11",
     "vue-apexcharts": "^1.6.0",
     "vue-horizontal": "^0.8.12",
+    "vue-html2pdf": "^1.8.0",
     "vue-router": "^3.2.0",
     "vue-tel-input-vuetify": "^1.2.16",
     "vue-tour": "^2.0.0",

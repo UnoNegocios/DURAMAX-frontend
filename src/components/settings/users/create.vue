@@ -84,6 +84,7 @@ export default {
                 {text: 'Acceso a Usuarios', value: 'users'},
                 {text: 'Acceso a Bitacoras', value: 'activityLog'},
                 {text: 'Acceso a Reportes', value: 'reports'},
+                {text: 'Acceso a Metas', value: 'goals'},
 
                 {text: 'Eliminar Notas', value: 'deleteNotes'},
             ]
