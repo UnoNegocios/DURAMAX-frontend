@@ -3,11 +3,19 @@
         <v-toolbar flat class="px-6 pb-4 pt-2">
             <v-toolbar-title class="mt-4">Metas</v-toolbar-title>
             <v-spacer></v-spacer>
-            <v-autocomplete class="pt-5" v-model="date_filter" :items="goals" item-text="name" item-value="dates"></v-autocomplete>
-            <v-dialog v-model="dialog" width="750" >
+            <!--v-autocomplete class="pt-5" v-model="date_filter2" :items="goals" item-text="name" item-value="dates"></v-autocomplete-->
+
+            <v-menu offset-y :close-on-content-click="closeDatePicker(date_filter)">
                 <template v-slot:activator="{ on, attrs }">
-                    <v-btn class="elevation-0 ml-8" dark v-bind="attrs" v-on="on" small rounded color="primary">Crear Nueva Meta</v-btn>
+                    <v-text-field style="max-width:320px;" class="mt-5" outlined dense clearable v-model="date_filter" label="Filtrar por Fecha" prepend-icon="mdi-calendar" v-bind="attrs" readonly v-on="on"></v-text-field>
                 </template>
+                <v-date-picker v-model="date_filter" range></v-date-picker>
+            </v-menu>
+
+            <v-dialog v-model="dialog" width="750" >
+                <!--template v-slot:activator="{ on, attrs }">
+                    <v-btn class="elevation-0 ml-8" dark v-bind="attrs" v-on="on" small rounded color="primary">Crear Nueva Meta</v-btn>
+                </template-->
 
                 <v-card>
                     <v-card-title class="text-h5 lighten-2">
@@ -16,11 +24,15 @@
                     <v-row class="ma-0 pt-4 mx-6">
                         <v-col cols="6">
                             <v-text-field v-model="new_goal.name" label="Nombre"></v-text-field>
-                            <v-text-field v-model="new_goal.email_whatsapp" label="Email/WhatsApp"></v-text-field>
+                            <!--v-text-field v-model="new_goal.email_whatsapp" label="Email/WhatsApp"></v-text-field-->
                             <v-text-field v-model="new_goal.llamada" label="Llamada"></v-text-field>
                             <v-text-field v-model="new_goal.visita" label="Visita"></v-text-field>
-                            <v-text-field v-model="new_goal.entrega" label="Entrega"></v-text-field>
-                            <v-text-field v-model="new_goal.muestra" label="Muestra"></v-text-field>
+                            <!--v-text-field v-model="new_goal.entrega" label="Entrega"></v-text-field-->
+                            
+
+                            
+
+
                             <v-menu v-model="datePicker" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y min-width="290px" >
                                 <template v-slot:activator="{ on }">
                                     <v-text-field v-model="new_goal.start_date" label="Fecha Inicio" prepend-icon="mdi-calendar" readonly v-on="on"></v-text-field>
@@ -29,10 +41,13 @@
                             </v-menu>
                         </v-col>
                         <v-col cols="6">
-                            <v-text-field v-model="new_goal.colocación_de_pedidos" label="Colocación de Pedidos"></v-text-field>
-                            <v-text-field v-model="new_goal.admin" label="ADMIN"></v-text-field>
-                            <v-text-field v-model="new_goal.clientes_nuevos" label="Clientes Nuevos"></v-text-field>
-                            <v-text-field v-model="new_goal.prospectos_nuevos" label="Prospectos Nuevos"></v-text-field>
+
+                            <v-text-field v-model="new_goal.muestra" label="Muestra"></v-text-field>
+                            
+                            <!--v-text-field v-model="new_goal.colocación_de_pedidos" label="Colocación de Pedidos"></v-text-field>
+                            <v-text-field v-model="new_goal.admin" label="ADMIN"></v-text-field-->
+                            <!--v-text-field v-model="new_goal.clientes_nuevos" label="Clientes Nuevos"></v-text-field-->
+                            <!--v-text-field v-model="new_goal.prospectos_nuevos" label="Prospectos Nuevos"></v-text-field-->
                             <v-text-field v-model="new_goal.cotiaziones" label="Cotizaciones"></v-text-field>
                             <v-text-field v-model="new_goal.ventas" prefix="$" label="Ventas"></v-text-field>
                             <v-menu v-model="datePicker2" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y min-width="290px" >
@@ -64,12 +79,12 @@
                 <v-list-item v-for="activity in activities" :key="activity.id">
                     <span>{{activity.type}}</span>
                 </v-list-item>
-                <v-list-item>
+                <!--v-list-item>
                     <span>Clientes Nuevos</span>
                 </v-list-item>
                 <v-list-item>
                     <span>Prospectos Nuevos</span>
-                </v-list-item>
+                </v-list-item-->
                 <v-list-item>
                     <span>Cotizaciones</span>
                 </v-list-item>
@@ -77,26 +92,26 @@
                     <span>Ventas</span>
                 </v-list-item>
             </v-card>
-            <v-card style="width:150px;" class="elevation-0 background-title" v-if="selected_goal!=undefined">
+            <v-card style="width:140px;" class="elevation-0 background-title" v-if="selected_goal!=undefined">
                 <v-list-item style="background:white;">
                     <span style="text-align:center; width: 100%;">META</span>
                 </v-list-item>
-                <v-list-item>
+                <!--v-list-item>
                     <span style="text-align:center; width: 100%;">{{selected_goal.email_whatsapp}}</span>
-                </v-list-item>
+                </v-list-item-->
                 <v-list-item>
                     <span style="text-align:center; width: 100%;">{{selected_goal.llamada}}</span>
                 </v-list-item>
                 <v-list-item>
                     <span style="text-align:center; width: 100%;">{{selected_goal.visita}}</span>
                 </v-list-item>
-                <v-list-item>
+                <!--v-list-item>
                     <span style="text-align:center; width: 100%;">{{selected_goal.entrega}}</span>
-                </v-list-item>
+                </v-list-item-->
                 <v-list-item>
                     <span style="text-align:center; width: 100%;">{{selected_goal.muestra}}</span>
                 </v-list-item>
-                <v-list-item>
+                <!--v-list-item>
                     <span style="text-align:center; width: 100%;">{{selected_goal.colocación_de_pedidos}}</span>
                 </v-list-item>
                 <v-list-item>
@@ -107,7 +122,7 @@
                 </v-list-item>
                 <v-list-item>
                     <span style="text-align:center; width: 100%;">{{selected_goal.prospectos_nuevos}}</span>
-                </v-list-item>
+                </v-list-item-->
                 <v-list-item>
                     <span style="text-align:center; width: 100%;">{{selected_goal.cotiaziones}}</span>
                 </v-list-item>
@@ -115,8 +130,8 @@
                     <span style="text-align:center; width: 100%;">{{(selected_goal.ventas*1).toLocaleString('es-MX', { style: 'currency', currency: 'MXN',})}}</span>
                 </v-list-item>
             </v-card>
-            <vue-horizontal style="width:calc(100% - 300px);">
-                <v-card style="width:150px;" v-for="(user, user_index) in users" :key="user_index" class="elevation-0">
+            <vue-horizontal style="width:calc(100% - 300px);" v-if="companies.length>0 && calendars.length>0 && quotations.length>0 && leads.length>0">
+                <v-card style="width:140px;" v-for="(user, user_index) in users" :key="user_index" class="elevation-0">
                     <div class="background-title">
                         <v-list-item>
                             <span style="text-align:center; width: 100%;">{{user.name}}</span>
@@ -131,7 +146,7 @@
                             </v-progress-linear>
                         </div>
                     </v-list-item>
-                    <v-list-item class="pa-0">
+                    <!--v-list-item class="pa-0">
                         <div style="width:100%; text-align:center;">
                             <span style="text-align:center;">{{clientsCount(user.id)}}</span>
                             <br/>
@@ -148,7 +163,7 @@
                                 <strong style="font-size:13px;">{{ percentage[user_index].prospectos_nuevos.toFixed(2) }}%</strong>
                             </v-progress-linear>
                         </div>
-                    </v-list-item>
+                    </v-list-item-->
                     <v-list-item class="pa-0">
                         <div style="width:100%; text-align:center;">
                             <span style="text-align:center;">{{quotationsCount(user.id)}}</span>
@@ -169,6 +184,13 @@
                     </v-list-item>
                 </v-card>
             </vue-horizontal>
+            <div v-else class="text-center" style="width:calc(100% - 300px);">
+                <v-progress-circular
+                style="margin:130px auto;"
+                indeterminate
+                color="primary"
+                ></v-progress-circular>
+            </div>
         </v-row>
     </v-container>
 </template>
@@ -181,6 +203,7 @@ export default {
         datePicker:false,
         datePicker2:false,
         date_filter:[],
+        date_filter2:['2022-12-19','2022-12-19'],
         dialog:false,
         new_goal:{
             name:'',
@@ -206,6 +229,18 @@ export default {
         this.date_filter[1] = new Date(date.getFullYear(), date.getMonth() + 1, 0).toLocaleString("sv-SE", {timeZone: "America/Monterrey"}).toString().slice(0, 10)
     },
     computed:{
+        companies(){
+            return this.$store.state.company.companies
+        },
+        calendars(){
+            return this.$store.state.calendar.calendars
+        },
+        quotations(){
+            return this.$store.state.quotation.quotations
+        },
+        leads(){
+            return this.$store.state.lead.leads
+        },
         percentage(){
             var perro = [{
                 clientes_nuevos: 0,
@@ -242,7 +277,7 @@ export default {
             return perro
         },
         selected_goal(){
-            return this.$store.state.goal.goals.filter(id=>id.start_date == this.date_filter[0] && id.end_date == this.date_filter[1])[0]
+            return this.$store.state.goal.goals.filter(id=>id.start_date == this.date_filter2[0] && id.end_date == this.date_filter2[1])[0]
         },
         goals(){
             return this.$store.state.goal.goals.map(id=>{
@@ -253,7 +288,11 @@ export default {
             })
         },
         activities(){
-            return this.$store.state.activity.activities
+            return this.$store.state.activity.activities.filter(user=>
+                user.type=='Visita'||
+                user.type=='Llamada'||
+                user.type=='Muestra'
+            )
         },
         users(){
             return this.$store.state.user.users.filter(user=>
@@ -267,7 +306,7 @@ export default {
                 user.name!='Luis Gonzalez'&&
                 user.name!='José Manuel'&&
                 user.name!='Inhabilitado'&&
-                user.name!='Aracely'
+                user.name!='Araceli'
             )
         }
     },
@@ -320,35 +359,35 @@ export default {
             })
         },
         activitiesCount(activity_id, user_id){
-            var response = this.$store.state.calendar.calendars.filter(calendar=>calendar.activity_id == activity_id).filter(calendar=>calendar.user_id == user_id)
+            var response = this.calendars.filter(calendar=>calendar.activity_id == activity_id).filter(calendar=>calendar.user_id == user_id)
             if(this.date_filter!=undefined && this.date_filter.length==2){
                 response = this.filterByDate(response)
             }
             return response.length
         },
         clientsCount(user_id){
-            var response = this.$store.state.company.companies.filter(company=>company.user_id == user_id)
+            var response = this.companies.filter(company=>company.user_id == user_id)
             if(this.date_filter!=undefined && this.date_filter.length==2){
                 response = this.filterByDate(response)
             }
             return response.length
         },
         leadsCount(user_id){
-            var response = this.$store.state.lead.leads.filter(lead=>lead.user_id == user_id)
+            var response = this.leads.filter(lead=>lead.user_id == user_id)
             if(this.date_filter!=undefined && this.date_filter.length==2){
                 response = this.filterByDate(response)
             }
             return response.length
         },
         quotationsCount(user_id){
-            var response = this.$store.state.quotation.quotations.filter(quotation=>quotation.status == 'quotation').filter(quotation=>quotation.user_id == user_id)
+            var response = this.quotations.filter(quotation=>quotation.status == 'quotation').filter(quotation=>quotation.user_id == user_id)
             if(this.date_filter!=undefined && this.date_filter.length==2){
                 response = this.filterByDate(response)
             }
             return response.length
         },
         salesCount(user_id){
-            var response = this.$store.state.quotation.quotations.filter(quotation=>quotation.status == 'vendido').filter(quotation=>quotation.user_id == user_id)
+            var response = this.quotations.filter(quotation=>quotation.status == 'vendido').filter(quotation=>quotation.user_id == user_id)
             if(this.date_filter!=undefined && this.date_filter.length==2){
                 response = this.filterByDate(response)
             }

@@ -110,7 +110,7 @@ export default {
                 user.name!='Luis Gonzalez'&&
                 user.name!='José Manuel'&&
                 user.name!='Inhabilitado'&&
-                user.name!='Aracely'
+                user.name!='Araceli'
             )
         },
         activitiesLists(){
