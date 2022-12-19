@@ -343,7 +343,6 @@ export default {
             this.$store.dispatch('calendar/getCalendars')
         },
         closeCreateDialogCalendar: function(params) {
-            console.log('table')
             this.createDialog = false;
             this.$store.dispatch('calendar/getCalendars')
         },

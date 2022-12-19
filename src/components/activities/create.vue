@@ -257,7 +257,6 @@ import CreateCompany from "../clients/companies/create"
                 }
             },
             close () {
-                console.log('3')
                 this.calendars = [{
                     company_id:null,
                     //contact_id:'',
@@ -270,12 +269,10 @@ import CreateCompany from "../clients/companies/create"
                     user_id:''
                 }],
                 this.$nextTick(() => {
-                    console.log('4')
                     this.$emit("closeCreateDialogCalendar", false);
                 })
             },
             save(){
-                console.log('1')
                 this.gris = true
                 //axios.post("http://829a-2806-2f0-4000-d76b-448-7391-2afe-44f6.ngrok.io/api/v1/perro",Object.assign(JSON.stringify(this.calendars)))
                 for(var i=0; i<this.calendars.length; i++){
@@ -283,7 +280,6 @@ import CreateCompany from "../clients/companies/create"
                     this.calendars[i].date = this.calendars[i].only_date + ' ' + this.calendars[i].only_time
                     axios.post("https://backendduramax.unocrm.mx/api/v1/calendar/create",Object.assign(this.calendars[i])).then(resp=>{
                         if(i==(this.calendars.length-1)||this.calendars.length==1){
-                            console.log('2')
                             this.gris = false
                             this.close()
                         }

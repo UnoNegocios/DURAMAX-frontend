@@ -35,6 +35,22 @@
           </v-tooltip>
         </div>
 
+        <div v-show="permissions('goals')">
+          <v-tooltip right open-delay="1000">
+            <template v-slot:activator="{ on, attrs }">
+              <v-list-item to="/goal-report" v-bind="attrs" v-on="on">
+                <v-list-item-action class="mr-3">
+                  <v-icon> mdi-chart-gantt </v-icon>
+                </v-list-item-action>
+                <v-list-item-content>
+                  <v-list-item-title>Metas</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+              </template>
+            <span>Reporte de metas por usuario</span>
+          </v-tooltip>
+        </div>
+
         <v-divider class="ma-4"></v-divider>
 
         <v-tooltip right open-delay="1000">
@@ -176,7 +192,7 @@
       </v-list>
       <template v-slot:append>
         <div style="color:#9ca3a5; font-size: 12px;" class="pa-2">
-          UNOCRM | v3.0.18 <v-icon> mdi-settings</v-icon>
+          UNOCRM | v3.0.19 <v-icon> mdi-settings</v-icon>
         </div>
       </template>
     </v-navigation-drawer>
@@ -322,6 +338,7 @@
 	    this.$store.dispatch('rejection/getRejections') 
       this.$store.dispatch('quotation/getQuotations')
       this.$store.dispatch('origin/getOrigins')
+      this.$store.dispatch('goal/getGoals')
       this.$store.dispatch('status/getStatuses')
       this.$store.dispatch('phase/getPhases')
       this.$store.dispatch('category/getCategories')

@@ -22,6 +22,8 @@ import pp from "./modules/pp"
 import state from "./modules/state"
 import city from "./modules/city"
 
+import goal from "./modules/goal"
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -31,6 +33,7 @@ export default new Vuex.Store({
   actions: {
   },
   modules: {
+    goal,
     lead,
     state,
     city,
