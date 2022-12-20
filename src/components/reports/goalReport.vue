@@ -91,6 +91,9 @@
                 <v-list-item>
                     <span>Ventas</span>
                 </v-list-item>
+                <v-list-item style="height:105px; border-right:0px!important;">
+                    <strong style="font-size:21px;">Calificación</strong>
+                </v-list-item>
             </v-card>
             <v-card style="width:140px;" class="elevation-0 background-title" v-if="selected_goal!=undefined">
                 <v-list-item style="background:white;">
@@ -128,6 +131,9 @@
                 </v-list-item>
                 <v-list-item>
                     <span style="text-align:center; width: 100%;">{{(selected_goal.ventas*1).toLocaleString('es-MX', { style: 'currency', currency: 'MXN',})}}</span>
+                </v-list-item>
+                <v-list-item style="height:105px;">
+                    
                 </v-list-item>
             </v-card>
             <vue-horizontal style="width:calc(100% - 300px);" v-if="companies.length>0 && calendars.length>0 && quotations.length>0 && leads.length>0">
@@ -182,6 +188,13 @@
                             </v-progress-linear>
                         </div>
                     </v-list-item>
+                    <v-list-item class="pa-0">
+                        <div style="width:100%; text-align:center;">
+                            <v-progress-circular :color="user.color" :rotate="360" :size="80" class="my-3" :width="15" v-if="selected_goal!=undefined" :value="((percentage[user_index].ventas + percentage[user_index].cotiaziones + estupido(user_index, user.id))/5).toFixed(2)" height="15">
+                                <strong style="font-size:13px;">{{ ((percentage[user_index].ventas + percentage[user_index].cotiaziones + estupido(user_index, user.id))/5).toFixed(2) }}%</strong>
+                            </v-progress-circular>
+                        </div>
+                    </v-list-item>
                 </v-card>
             </vue-horizontal>
             <div v-else class="text-center" style="width:calc(100% - 300px);">
@@ -191,6 +204,17 @@
                 color="primary"
                 ></v-progress-circular>
             </div>
+            
+
+
+            <v-row class="ma-0 mt-4" v-if="companies.length>0 && calendars.length>0 && quotations.length>0 && leads.length>0">
+                <v-spacer/>
+                <v-card-title>Calificación Global</v-card-title>
+                <v-spacer/>
+            </v-row>
+            <v-progress-linear v-model="total" height="25" v-if="companies.length>0 && calendars.length>0 && quotations.length>0 && leads.length>0">
+                <strong> {{ total }}%</strong>
+            </v-progress-linear>
         </v-row>
     </v-container>
 </template>
@@ -308,6 +332,13 @@ export default {
                 user.name!='Inhabilitado'&&
                 user.name!='Araceli'
             )
+        },
+        total(){
+            var sum = 0
+            for(var i=0; i<this.users.length; i ++){
+                sum = sum + this.estupido(i ,this.users[i].id) + this.percentage[i].ventas + this.percentage[i].cotiaziones
+            }
+            return ((sum/this.users.length)/5).toFixed(2)
         }
     },
     components: {
@@ -357,6 +388,18 @@ export default {
                 this.dialog = false
                 this.$store.dispatch('goal/getGoals')
             })
+        },
+        estupido(user_index ,user_id){
+            var sum = 0 
+            var response = this.calendars.filter(calendar=>calendar.user_id == user_id)
+            if(this.date_filter!=undefined && this.date_filter.length==2){
+                response = this.filterByDate(response)
+            }
+
+            for(var i=0; i<this.activities.length; i++){
+                sum = sum + this.activities_percentage[user_index][i]
+            }
+            return sum
         },
         activitiesCount(activity_id, user_id){
             var response = this.calendars.filter(calendar=>calendar.activity_id == activity_id).filter(calendar=>calendar.user_id == user_id)
