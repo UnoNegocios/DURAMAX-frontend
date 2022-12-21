@@ -330,7 +330,9 @@ export default {
                 user.name!='Luis Gonzalez'&&
                 user.name!='José Manuel'&&
                 user.name!='Inhabilitado'&&
-                user.name!='Araceli'
+                user.name!='Araceli'&&
+                user.name!='Gabriela'&&
+                user.name!='Cristina'
             )
         },
         total(){
