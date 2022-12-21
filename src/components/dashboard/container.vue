@@ -111,8 +111,8 @@ export default {
                 user.name!='José Manuel'&&
                 user.name!='Inhabilitado'&&
                 user.name!='Araceli'&&
-                user.name!='Gabriela'&&
-                user.name!='Cristina'
+                user.name!='Gabriela Vazquez'&&
+                user.name!='Cristina Guerra'
             )
         },
         activitiesLists(){
