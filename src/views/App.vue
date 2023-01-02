@@ -192,7 +192,7 @@
       </v-list>
       <template v-slot:append>
         <div style="color:#9ca3a5; font-size: 12px;" class="pa-2">
-          UNOCRM | v3.0.27 <v-icon> mdi-settings</v-icon>
+          UNOCRM | v3.0.28 <v-icon> mdi-settings</v-icon>
         </div>
       </template>
     </v-navigation-drawer>

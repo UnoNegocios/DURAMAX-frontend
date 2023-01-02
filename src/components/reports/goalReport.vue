@@ -406,7 +406,7 @@ export default {
         activitiesCount(activity_id, user_id){
             var response = this.calendars.filter(calendar=>calendar.activity_id == activity_id).filter(calendar=>calendar.user_id == user_id)
             if(this.date_filter!=undefined && this.date_filter.length==2){
-                response = this.filterByDate(response)
+                response = response.filter(resp=>new Date(resp.date) >= new Date(this.date_filter[0] + ' 00:00:00') && new Date(resp.date) <= new Date(this.date_filter[1] + ' 00:00:00'))
             }
             return response.length
         },
@@ -434,7 +434,7 @@ export default {
         salesCount(user_id){
             var response = this.quotations.filter(quotation=>quotation.status == 'vendido').filter(quotation=>quotation.user_id == user_id)
             if(this.date_filter!=undefined && this.date_filter.length==2){
-                response = this.filterByDate(response)
+                response = response.filter(resp=>new Date(resp.updated_at) >= new Date(this.date_filter[0] + ' 00:00:00') && new Date(resp.updated_at) <= new Date(this.date_filter[1] + ' 00:00:00'))
             }
             return response.reduce((acumulador, actual) => acumulador + actual.amount, 0);
         },
